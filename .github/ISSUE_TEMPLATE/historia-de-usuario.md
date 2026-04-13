@@ -2,7 +2,7 @@
 name: Historia de Usuario
 about: Plantilla
 title: NOMBRE [PRIORIDAD]
-labels: ''
+labels: Historia de Usuario
 assignees: ''
 
 ---
