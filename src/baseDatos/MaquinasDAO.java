@@ -1,5 +1,26 @@
 package baseDatos;
 
-public class MaquinasDAO {
+import java.sql.*;
+import java.util.HashMap;
 
+import aplicacion.MaquinaExpendedora;
+
+public class MaquinasDAO extends AbstractDAO{
+
+	
+	public MaquinasDAO(aplicacion.FachadaAplicacion fa, Connection conexion) {
+		super(fa, conexion);
+	}
+	
+	public HashMap<String, MaquinaExpendedora> cargarMaquinas() {
+		// TO-DO
+		
+		return null;
+	}
+	
+	public void guardarMaquinas(HashMap<String, MaquinaExpendedora> maquinas) {
+		// TO-DO
+		
+		return;
+	}
 }
