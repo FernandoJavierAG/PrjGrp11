@@ -22,7 +22,7 @@ public class MaquinaExpendedora {
 		
 		this.capacidad = capacidad;
 		if(capacidad < 0) {
-			
+			throw new IllegalArgumentException("La capacidad debe ser no-negativa.");
 		}
 		
 		ultimaActualizacion = null;
