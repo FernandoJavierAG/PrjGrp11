@@ -1,3 +1,6 @@
+
+package aplicacion;
+
 public class Stock {
 
     // Atributos
