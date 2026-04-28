@@ -30,6 +30,37 @@ public class Stock {
         maquina.registrarActualizacion();
     }
 
+
+
+    
+    // ── Método: asignar nueva lista de productos a una máquina ───────────────
+    /**
+     * Asigna una nueva lista de productos a una máquina expendedora.
+     * Elimina los registros de stock anteriores de esa máquina y crea
+     * nuevos registros con cantidadActual = 0 para cada producto nuevo.
+     */
+    public static void asignarProductos(MaquinaExpendedora maquina, List<Producto> nuevosProductos) {
+
+        // Eliminar del repositorio los stocks actuales de esa máquina
+        List<Stock> aEliminar = new ArrayList<>();
+        for (Stock s : repositorio) {
+            if (s.maquina.getID().equals(maquina.getID())) {
+                aEliminar.add(s);
+            }
+        }
+        for (Stock s : aEliminar) {
+            repositorio.remove(s);
+        }
+
+        // Actualizar la lista de productos en la máquina OJO FUNCIONALIDAD INTERESANTE DE JAVA PONER DENTRO DEL CONSTRUCTOR DEL ARRAY OTRO ARRAY PARA QUE COJA SUS DATOS
+        maquina.setProductos(new ArrayList<>(nuevosProductos));
+
+        // Crear un registro de stock a 0 por cada producto nuevo
+        for (Producto p : nuevosProductos) {
+            new Stock(p, maquina, 0, 0);
+        }
+    }
+
    // ── Método 1 ─────────────────────────────────────────────────────────────
 /**
  * Devuelve todos los registros de stock de una máquina expendedora concreta.
