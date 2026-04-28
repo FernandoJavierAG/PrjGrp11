@@ -93,4 +93,33 @@ public class Estimacion{
 		
 		return resultado;
 	}
+	
+	/* Función para actualizar el consumo diario en función de las ventas totales */
+	public void actualizarConsumo() {
+		/* Variables requeridas */
+		float consumo = 0.0f;	// media de consumo diario
+		LocalDate diaConsumo;	// variable auxiliar para el bucle, para comprobar cuando terminan las ventas de una fecha determinada
+		int diasTotales = 0;	// variable auxiliar para contar los días distintos en los que se han producido ventas
+		
+		/* Inicializamos diaConsumo a la jornada actual */
+		diaConsumo = LocalDate.now();
+		
+		/* Buscamos los productos vendidos para calcular la media en función de los datos globales */
+		for(Venta venta : this.stock.getProducto().getVentas()) {
+			/* Sumamos la contribución de la venta al total */
+			consumo += (float) venta.getUnidades();
+			
+			/* Comparamos la fecha de la venta con la más reciente almacenada en diaConsumo */
+			if(diaConsumo.compareTo(venta.getFecha().toLocalDate()) != 0) {
+				diaConsumo = venta.getFecha().toLocalDate();	// Actualizamos el día más reciente
+				diasTotales++;	// Sumamos 1 día más para la media, al haber encontrado una fecha distinta a la actual
+			}
+		}
+		
+		/* Consumo medio = consumo total / días de ventas */
+		consumo = consumo / (float) diasTotales;
+		
+		/* Actualizamos el valor de consumoDiario */
+		this.setConsumoDiario(consumo);
+	}
 }
