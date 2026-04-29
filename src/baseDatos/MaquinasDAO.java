@@ -23,4 +23,9 @@ public class MaquinasDAO extends AbstractDAO{
 		
 		return;
 	}
+	public void guardarMaquina(MaquinaExpendedora maquina) {
+		// TO-DO
+		
+		return;
+	}
 }

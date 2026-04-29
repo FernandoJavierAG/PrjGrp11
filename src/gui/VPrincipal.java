@@ -25,7 +25,7 @@ public class VPrincipal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField textID;
 	private JScrollPane scrollPane;
 
 	/**
@@ -44,17 +44,17 @@ public class VPrincipal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		textID = new JTextField();
+		textID.setColumns(10);
 		
 		scrollPane = new JScrollPane();
 		
 		JButton btnAadir = new JButton("Añadir");
 		btnAadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VMaquina vmaq = new VMaquina(null);
+				VMaquina vmaq = new VMaquina(fa);
 				vmaq.setVisible(true);
-				vmaq.setAlwaysOnTop(rootPaneCheckingEnabled);
+				vmaq.setAlwaysOnTop(true);
 			}
 		});
 		
@@ -79,7 +79,7 @@ public class VPrincipal extends JFrame {
 							.addGap(13)
 							.addComponent(lblId)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textField, GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+							.addComponent(textID, GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnBuscar))
 						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
@@ -98,7 +98,7 @@ public class VPrincipal extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(7)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textID, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnBuscar)
 						.addComponent(lblId))
 					.addPreferredGap(ComponentPlacement.RELATED)

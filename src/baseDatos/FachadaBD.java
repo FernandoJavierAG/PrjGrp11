@@ -30,4 +30,8 @@ public class FachadaBD {
 		daoMaquinas.guardarMaquinas(maquinas);
 	}
 	
+	public void guardarMaquina(MaquinaExpendedora maquina) {
+		daoMaquinas.guardarMaquina(maquina);
+	}
+	
 }

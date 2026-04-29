@@ -17,6 +17,11 @@ public class FachadaAplicacion {
 		
 		gm = new GestionMaquinas(fgui, fbd);
 	}
+	
+	public void guardarMaquina(MaquinaExpendedora maquina) {
+		gm.anadirMaquina(maquina);
+		fbd.guardarMaquina(maquina);
+	}
 }
 
 

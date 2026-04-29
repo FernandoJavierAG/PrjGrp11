@@ -29,7 +29,6 @@ public class Localizacion {
 	}
 
 	public Localizacion(float latitud, float longitud, float altitud) {
-		super();
 		this.latitud = latitud;
 		this.longitud = longitud;
 		this.altitud = altitud;
