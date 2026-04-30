@@ -20,6 +20,7 @@ public class MaquinaExpendedora {
 		this.ventas = new ArrayList<Venta>();
 	}
 	
+	//EL almacenamiento en la base de datos recaería sobre GestionMaquinas
 	public void venta(int producto, int unidades) throws IllegalArgumentException {
 		
 		if(producto < 0 || producto > capacidad) {
