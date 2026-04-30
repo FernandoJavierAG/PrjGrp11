@@ -28,6 +28,7 @@ public class MaquinaExpendedora {
 		}
 		
 		Venta venta = new Venta(unidades);
+		//La nueva venta debe estar a disposición tanto del producto como de la máquina asociada
 		this.ventas.add(venta);
 		this.stocks.get(producto).getVentas().add(venta);
 		
