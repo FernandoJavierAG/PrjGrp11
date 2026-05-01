@@ -231,7 +231,8 @@ public class VMaquina extends JFrame {
 		this(fa);
 	}
 	
-	public void guardarMaquina() {
+	public boolean guardarMaquina() {
+		try {
 		String newID = textMarca.getText() + "-" + textNSerie.getText();
 		Integer newCapacidad = Integer.parseInt(textCapacidad.getText());
 		Localizacion newLoc = new Localizacion(
@@ -240,23 +241,28 @@ public class VMaquina extends JFrame {
 				Float.parseFloat(textAltitud.getText())
 				);
 		
-		try {
 		
-		if(this.maquina == null)
+		
+		if(this.maquina == null) {
 			maquina = new MaquinaExpendedora(newID, newCapacidad, newLoc);
-		else
+		}
+		else {
 			maquina.setID(newID);
 			maquina.setCapacidad(newCapacidad);
 			maquina.setLoc(newLoc);
-		} catch(IllegalArgumentException error) {
-			JOptionPane.showMessageDialog(this, error.getMessage()); 
 		}
-		
 		fa.guardarMaquina(maquina);
+		return true;
+		
+		} catch(IllegalArgumentException error) {
+			JOptionPane.showMessageDialog(this, "Error:"+error.getMessage());
+			return false;
+		}
 	}
 	
-    private void btnGuardarPerformed(ActionEvent evt) {  
-    	guardarMaquina();
+    private void btnGuardarPerformed(ActionEvent evt) {
+    	if(guardarMaquina())
+    		this.dispose();
     }
     
     private void btnSalirPerformed(ActionEvent evt) {  

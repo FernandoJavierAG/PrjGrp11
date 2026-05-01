@@ -14,6 +14,9 @@ public class FachadaBD {
 	public FachadaBD(aplicacion.FachadaAplicacion fa) {
 		this.fa = fa;
 		
+		daoMaquinas = new MaquinasDAO(fa, null);
+		daoProductos = new ProductosDAO(fa, null);
+		
 		// TO-DO
 		// Apertura de conexión
 		

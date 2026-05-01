@@ -11,8 +11,4 @@ public class FachadaGUI {
 		this.vp = new VPrincipal(fa);
 		vp.setVisible(true);
 	}
-	
-	public static void main(String args[]) {
-		new FachadaGUI(null);
-	}
 }

@@ -13,7 +13,6 @@ public class GestionMaquinas {
 		this.fgui = fgui;
 		this.fbd = fbd;
 		
-		maquinasExpendedoras = new HashMap<String, MaquinaExpendedora>();
 		maquinasExpendedoras = fbd.cargarMaquinas();	
 	}
 	

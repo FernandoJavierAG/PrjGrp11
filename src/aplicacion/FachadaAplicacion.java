@@ -22,6 +22,10 @@ public class FachadaAplicacion {
 		gm.anadirMaquina(maquina);
 		fbd.guardarMaquina(maquina);
 	}
+	
+	public static void main(String args[]) {
+		new FachadaAplicacion();
+	}
 }
 
 

@@ -15,7 +15,7 @@ public class MaquinasDAO extends AbstractDAO{
 	public HashMap<String, MaquinaExpendedora> cargarMaquinas() {
 		// TO-DO
 		
-		return null;
+		return new HashMap<String, MaquinaExpendedora>();
 	}
 	
 	public void guardarMaquinas(HashMap<String, MaquinaExpendedora> maquinas) {
