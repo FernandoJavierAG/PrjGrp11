@@ -127,6 +127,24 @@ public class MaquinaExpendedora {
 		this.ultimaActualizacion = ultimaActualizacion;
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(ID, capacidad, loc, ultimaActualizacion);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MaquinaExpendedora other = (MaquinaExpendedora) obj;
+		return Objects.equals(ID, other.ID) && capacidad == other.capacidad && Objects.equals(loc, other.loc)
+				&& Objects.equals(ultimaActualizacion, other.ultimaActualizacion);
+	}
+
 	
 
 	
