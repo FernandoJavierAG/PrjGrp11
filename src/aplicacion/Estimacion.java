@@ -1,7 +1,8 @@
 package aplicacion;
 
-import java.time.LocalDateTime;	// para las fechas y horas al momento de calcular estimaciones
-import java.lang.Math;			// para las operaciones con las que calcular las estimaciones
+import java.time.Instant;				// para las fechas y horas al momento de calcular estimaciones
+import java.time.temporal.ChronoUnit;	// para poder sumar días a las variables de tipo instant
+import java.lang.Math;					// para las operaciones con las que calcular las estimaciones
 
 public class Estimacion{
 	private float consumoDiario;	// Valor medio de consumo de un producto en una máquina a diario
@@ -41,9 +42,9 @@ public class Estimacion{
 	
 	
 	/* Función para estimar la fecha en la que se agotará el stock */
-	public LocalDateTime fechaFinStock(){
+	public Instant fechaFinStock(){
 		/* Variables requeridas */
-		LocalDateTime finStock;
+		Instant finStock;
 		int cantidadStock = this.stock.getCantidad();
 		
 		/* Calculamos los días en los que se terminará el stock */
@@ -52,7 +53,8 @@ public class Estimacion{
 		int diasHastaFin = (int) Math.floor(cantidadStock / this.consumoDiario);
 		
 		/* Sumamos desde hoy los días calculados */
-		finStock = LocalDateTime.now().plusDays(diasHastaFin);
+		// Con chronounit especificamos que diasHastaFin se debe tratar como días en la suma
+		finStock = Instant.now().plus(diasHastaFin, ChronoUnit.DAYS);
 		
 		return finStock;
 	}
