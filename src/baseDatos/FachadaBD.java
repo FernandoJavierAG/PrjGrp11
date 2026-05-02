@@ -1,5 +1,8 @@
 package baseDatos;
 
+import aplicacion.MaquinaExpendedora;
+import aplicacion.Venta;
+
 public class FachadaBD {
 	aplicacion.FachadaAplicacion fa;
 	
@@ -7,6 +10,7 @@ public class FachadaBD {
 	
 	private MaquinasDAO daoMaquinas;
 	private ProductosDAO daoProductos;
+	private VentasDAO daoVentas;
 	
 	public FachadaBD(aplicacion.FachadaAplicacion fa) {
 		this.fa = fa;
@@ -16,5 +20,10 @@ public class FachadaBD {
 		// ...
 		
 		//
+	}
+
+	public void guardarVenta(String maquina, int producto, int unidades) {
+		daoVentas.guardarVenta(maquina, producto, unidades);
+		
 	}
 }
