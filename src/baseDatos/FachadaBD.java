@@ -22,8 +22,8 @@ public class FachadaBD {
 		//
 	}
 
-	public void guardarVenta(MaquinaExpendedora maquina, Venta venta) {
-		daoVentas.guardarVentas(maquina, venta);
+	public void guardarVenta(String maquina, int producto, int unidades) {
+		daoVentas.guardarVenta(maquina, producto, unidades);
 		
 	}
 }

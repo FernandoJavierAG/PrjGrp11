@@ -6,24 +6,20 @@ public class GestionMaquinas {
 
 	gui.FachadaGUI fgui;
 	baseDatos.FachadaBD fbd;
-	HashMap<String, MaquinaExpendedora> maquinasExpendedoras;
 	
 	public GestionMaquinas(gui.FachadaGUI fgui, baseDatos.FachadaBD fbd) {
 		this.fgui = fgui;
 		this.fbd = fbd;
-		
-		maquinasExpendedoras = new HashMap<String, MaquinaExpendedora>();
 	}
 	
-	public void registrarVenta(String maquina, int producto, int unidades) throws IllegalArgumentException {
+	public void guardarVenta(String maquina, int producto, int unidades) {
 		
-		if(maquinasExpendedoras.get(maquina) == null) {
-			throw new IllegalArgumentException("No existe ninguna máquina identificada como " + maquina + ".");
+		try {
+			fbd.guardarVenta(maquina, producto, unidades);
+		} catch(IllegalArgumentException e) {
+			//Esta funcionalidad no proviene de ninguna ventana, por solo es posiblle informar por consola
+			System.out.println(e.getMessage());
 		}
-		
-		maquinasExpendedoras.get(maquina).venta(producto, unidades);
-		fbd.guardarVenta(maquinasExpendedoras.get(maquina), new Venta(unidades));
-		
 	}
 	
 }
