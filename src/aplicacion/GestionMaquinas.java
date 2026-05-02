@@ -22,6 +22,7 @@ public class GestionMaquinas {
 		}
 		
 		maquinasExpendedoras.get(maquina).venta(producto, unidades);
+		fbd.guardarVenta(maquinasExpendedoras.get(maquina), new Venta(unidades));
 		
 	}
 	
