@@ -61,6 +61,11 @@ public class VPrincipal extends JFrame {
 		JButton btnEditar = new JButton("Editar");
 		
 		JButton btnSalir = new JButton("Salir");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnSalirPerformed(e);
+			}
+		});
 		
 		JButton btnGuardar = new JButton("Guardar");
 		
@@ -112,5 +117,9 @@ public class VPrincipal extends JFrame {
 					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
-	}
+	    }
+	
+		private void btnSalirPerformed(ActionEvent evt) {
+    		this.dispose();
+		}
 }

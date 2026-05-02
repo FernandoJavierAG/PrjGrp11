@@ -19,8 +19,7 @@ public class FachadaAplicacion {
 	}
 	
 	public void guardarMaquina(MaquinaExpendedora maquina) {
-		gm.anadirMaquina(maquina);
-		fbd.guardarMaquina(maquina);
+		gm.guardarMaquina(maquina);
 	}
 	
 	public static void main(String args[]) {

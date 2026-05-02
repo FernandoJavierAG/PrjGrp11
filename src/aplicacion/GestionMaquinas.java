@@ -7,21 +7,18 @@ public class GestionMaquinas {
 	gui.FachadaGUI fgui;
 	baseDatos.FachadaBD fbd;
 	
-	HashMap<String, MaquinaExpendedora> maquinasExpendedoras;
-	
 	public GestionMaquinas(gui.FachadaGUI fgui, baseDatos.FachadaBD fbd) {
 		this.fgui = fgui;
 		this.fbd = fbd;
 		
-		maquinasExpendedoras = fbd.cargarMaquinas();	
 	}
 	
-	public void anadirMaquina(MaquinaExpendedora maquina) {
-		maquinasExpendedoras.put(maquina.getID(), maquina);
+	public void guardarMaquina(MaquinaExpendedora maquina) {
+		fbd.guardarMaquina(maquina);
 	}
 	
-	public void guardarCambios() {
-		fbd.guardarMaquinas(maquinasExpendedoras);
+	public void guardarMaquinas(HashMap<String, MaquinaExpendedora> maquinas) {
+		fbd.guardarMaquinas(maquinas);
 	}
 	
 }
