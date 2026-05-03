@@ -6,6 +6,7 @@ public class FachadaAplicacion {
 	baseDatos.FachadaBD fbd;
 	
 	GestionMaquinas gm;
+	GestionEstimacion gest;
 
 	
 	public FachadaAplicacion() {
@@ -13,6 +14,7 @@ public class FachadaAplicacion {
 		fbd = new fbd();
 		
 		gm = new GestionMaquinas(fgui, fbd);
+		gest = new GestionEstimacion(fgui, fbd);
 	}
 }
 

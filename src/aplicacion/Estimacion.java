@@ -1,8 +1,6 @@
 package aplicacion;
 
-import java.time.Instant;				// para las fechas y horas al momento de calcular estimaciones
-import java.time.temporal.ChronoUnit;	// para poder sumar días a las variables de tipo instant
-import java.lang.Math;					// para las operaciones con las que calcular las estimaciones
+import java.util.Objects;
 
 public class Estimacion{
 	private float consumoDiario;	// Valor medio de consumo de un producto en una máquina a diario
@@ -36,26 +34,27 @@ public class Estimacion{
 	public Stock getStock() {
 		return this.stock;
 	}
-	public void setStock(Stock stock) {
+	public void setStock(Stock stock) throws IllegalArgumentException{
+		if(stock == null) {
+			throw new IllegalArgumentException("El stock asociado no puede ser nulo.");
+		}
 		this.stock = stock;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Estimacion other = (Estimacion) obj;
+		return (this.consumoDiario == other.consumoDiario && this.stock.equals(other.stock));
+	}
 	
-	/* Función para estimar la fecha en la que se agotará el stock */
-	public Instant fechaFinStock(){
-		/* Variables requeridas */
-		Instant finStock;
-		int cantidadStock = this.stock.getCantidad();
-		
-		/* Calculamos los días en los que se terminará el stock */
-		// Tenemos garantizado que el consumo diario será distinto de 0 gracias a la excepción del setter
-		// Usamos floor para evitar las estimaciones en las que se termine el stock antes del final de un día
-		int diasHastaFin = (int) Math.floor(cantidadStock / this.consumoDiario);
-		
-		/* Sumamos desde hoy los días calculados */
-		// Con chronounit especificamos que diasHastaFin se debe tratar como días en la suma
-		finStock = Instant.now().plus(diasHastaFin, ChronoUnit.DAYS);
-		
-		return finStock;
+	@Override
+	public String toString() {
+		return this.consumoDiario + this.stock.toString();
 	}
 }
