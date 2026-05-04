@@ -16,13 +16,21 @@ public class EstimacionDAO extends AbstractDAO{
 
 	
 	/* Función para estimar la fecha en la que se agotará el stock */
-	public Instant fechaFinStock(Estimacion est){
+	public Instant fechaFinStock(Estimacion est) throws IllegalArgumentException{
+		if(est == null) {
+			throw new IllegalArgumentException("La estimación no puede ser nula.");
+		}
 		/* Variables requeridas */
 		Instant finStock;
+		if(est.getStock() == null) {
+			throw new IllegalArgumentException("El stock asociado a la estimación no puede ser nulo.");
+		}
 		int cantidadStock = est.getStock().getCantidad();
 		
 		/* Calculamos los días en los que se terminará el stock */
-		// Tenemos garantizado que el consumo diario será distinto de 0 gracias a la excepción del setter
+		if(est.getConsumoDiario() <= 0.0) {
+			throw new IllegalArgumentException("El consumo diario debe ser mayor que 0.");
+		}
 		// Usamos floor para evitar las estimaciones en las que se termine el stock antes del final de un día
 		int diasHastaFin = (int) Math.floor(cantidadStock / est.getConsumoDiario());
 		
@@ -52,6 +60,16 @@ public class EstimacionDAO extends AbstractDAO{
 		
 		/* Acumular, para las ventas del producto de la máquina, las unidades vendidas en el rango especificado */
 		for(Venta v : ventas) {
+			if(v == null) {
+				throw new IllegalArgumentException("Las ventas no pueden ser nulas.");
+			}
+			if(v.getFecha() == null) {
+				throw new IllegalArgumentException("La fecha de las ventas no puede ser nula.");
+			}
+			if(v.getUnidades() <= 0) {
+				throw new IllegalArgumentException("Las unidades vendidas deben ser positivas.");
+			}
+			
 			// Si la comparación es <= 0, entonces la fecha límite es menor que la de la venta
 			// De este modo, estamos dentro del rango de días especificado, con lo que sumamos
 			if(rangoVentas.compareTo(v.getFecha()) <= 0) {
@@ -76,11 +94,25 @@ public class EstimacionDAO extends AbstractDAO{
 		Instant menorFecha;		// variable auxiliar para calcular la menor fecha de 
 		int diasTotales = 1;	// variable auxiliar para contar los días distintos en los que se han producido ventas
 		
+		if(est == null) {
+			throw new IllegalArgumentException("La estimación no puede ser nula.");
+		}
+		
 		/* Inicializamos diaConsumo a la jornada actual */
 		menorFecha = Instant.now();
 		
 		/* Buscamos los productos vendidos para calcular la media en función de los datos globales */
 		for(Venta v : ventas) {
+			if(v == null) {
+				throw new IllegalArgumentException("Las ventas no pueden ser nulas.");
+			}
+			if(v.getFecha() == null) {
+				throw new IllegalArgumentException("La fecha de las ventas no puede ser nula.");
+			}
+			if(v.getUnidades() <= 0) {
+				throw new IllegalArgumentException("Las unidades vendidas deben ser positivas.");
+			}
+			
 			/* Sumamos la contribución de la venta al total */
 			consumo += (float) v.getUnidades();
 			
