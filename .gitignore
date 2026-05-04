@@ -1,2 +1,5 @@
 // Ejecutables
 /bin
+.classpath
+.metadata/
+.settings/
