@@ -49,7 +49,17 @@ public class Venta {
 		this.producto = producto;
 	}
 	
-	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (this.getClass() != obj.getClass())
+			return false;
+		Venta other = (Venta) obj;
+		return (this.fecha.equals(other.getFecha())&& this.stock.equals(other.getMaquina()));
+	}
 	
 	
 	

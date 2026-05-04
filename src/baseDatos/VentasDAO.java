@@ -11,6 +11,10 @@ public class VentasDAO {
 	
 	//Simulación del almacenamiento persistente
 	HashMap<MaquinaExpendedora, List<Venta>> ventas;
+	
+	public VentasDAO(HashMap<MaquinaExpendedora, List<Venta>> ventas) {
+		this.ventas = ventas;
+	}
 
 	public void guardarVenta(String maquina, int producto, int unidades) throws IllegalArgumentException {
 		
