@@ -9,7 +9,7 @@ public class MaquinaExpendedora {
 	private String ID;
 	private int capacidad;
 	private Instant ultimaActualizacion;
-	private HashMap<Integer,Producto> stocks;
+	private HashMap<Integer,Stock> stocks;
 	private List<Venta> ventas;
 	
 	public MaquinaExpendedora(String ID, int capacidad) {
@@ -29,6 +29,6 @@ public class MaquinaExpendedora {
 	}
 	
 	public Producto getProducto(int producto) {
-		return this.stocks.get(producto);
+		return this.stocks.get(producto).getProducto();
 	}
 }
