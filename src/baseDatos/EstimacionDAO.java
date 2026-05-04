@@ -54,7 +54,7 @@ public class EstimacionDAO extends AbstractDAO{
 		for(Venta v : ventas) {
 			// Si la comparación es <= 0, entonces la fecha límite es menor que la de la venta
 			// De este modo, estamos dentro del rango de días especificado, con lo que sumamos
-			if(rangoVentas.compareTo(venta.getFecha()) <= 0) {
+			if(rangoVentas.compareTo(v.getFecha()) <= 0) {
 				// Sumamos las unidades vendidas del día pertinente
 				consumo += (float) v.getUnidades();
 			}
