@@ -22,6 +22,16 @@ public class MaquinasDAO extends AbstractDAO{
 		return simulacionBD;
 	}
 	
+	public HashMap<String, MaquinaExpendedora> cargarMaquinas(String ID) {
+		HashMap<String, MaquinaExpendedora> coincidencias = new HashMap<String, MaquinaExpendedora>();
+		
+		for(MaquinaExpendedora maquina : simulacionBD.values())
+			if(maquina.getID().contains(ID))
+				coincidencias.put(maquina.getID(), maquina);
+		
+		return coincidencias;
+	}
+	
 	public void guardarMaquinas(HashMap<String, MaquinaExpendedora> maquinas) {
 		simulacionBD = maquinas;
 	}

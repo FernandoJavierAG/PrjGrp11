@@ -17,7 +17,12 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
+import javax.swing.JTable;
+
+import aplicacion.MaquinaExpendedora;
 
 public class VPrincipal extends JFrame {
 	
@@ -27,6 +32,9 @@ public class VPrincipal extends JFrame {
 	private JPanel contentPane;
 	private JTextField textID;
 	private JScrollPane scrollPane;
+	private JTable tablaMaquinas;
+	
+	private JButton btnEditar;
 
 	/**
 	 * Create the frame.
@@ -52,13 +60,17 @@ public class VPrincipal extends JFrame {
 		JButton btnAadir = new JButton("Añadir");
 		btnAadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VMaquina vmaq = new VMaquina(fa);
-				vmaq.setVisible(true);
-				vmaq.setAlwaysOnTop(true);
+				btnAnadirPerformed(e);
 			}
 		});
 		
-		JButton btnEditar = new JButton("Editar");
+		btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnEditarPerformed(e);
+			}
+		});
+		btnEditar.setEnabled(false);
 		
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new ActionListener() {
@@ -70,6 +82,11 @@ public class VPrincipal extends JFrame {
 		JButton btnGuardar = new JButton("Guardar");
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnBuscarPerformed(e);
+			}
+		});
 		
 		JLabel lblId = new JLabel("ID:");
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -116,8 +133,42 @@ public class VPrincipal extends JFrame {
 						.addComponent(btnGuardar))
 					.addContainerGap())
 		);
+		
+		tablaMaquinas = new JTable();
+        tablaMaquinas.setModel(new ModeloTablaMaquinas());
+		scrollPane.setViewportView(tablaMaquinas);
 		contentPane.setLayout(gl_contentPane);
 	    }
+	
+		private void btnBuscarPerformed(ActionEvent evt) {
+			ModeloTablaMaquinas m;
+
+	        m=(ModeloTablaMaquinas) tablaMaquinas.getModel();
+	        List<MaquinaExpendedora> listado;
+	        String filtro = textID.getText().isEmpty() ? "" : textID.getText();
+	        listado = new ArrayList<MaquinaExpendedora>(fa.cargarMaquinas(filtro).values());
+	        m.setFilas(listado);
+	        if (m.getRowCount() > 0) {
+	        	tablaMaquinas.setRowSelectionInterval(0, 0);
+	        	btnEditar.setEnabled(true);
+	        }
+	        else btnEditar.setEnabled(false);
+		}
+		
+		private void btnAnadirPerformed(ActionEvent evt) {
+			VMaquina vmaq = new VMaquina(fa);
+			vmaq.setVisible(true);
+			vmaq.setAlwaysOnTop(true);
+		}
+		
+		private void btnEditarPerformed(ActionEvent evt) {
+			ModeloTablaMaquinas m = (ModeloTablaMaquinas) tablaMaquinas.getModel();
+			
+			VMaquina vmaq = new VMaquina(fa, m.obtenerMaquina(tablaMaquinas.getSelectedRow()));
+			
+			vmaq.setVisible(true);
+			vmaq.setAlwaysOnTop(true);
+		}
 	
 		private void btnSalirPerformed(ActionEvent evt) {
     		this.dispose();
