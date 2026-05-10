@@ -13,10 +13,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class MaquinaExpendedoraTest {
 
-	@Test
-	@DisplayName("Comportamiento general del constructor básico")
-	@Tag("Tests sobre constructores")
 	@ParameterizedTest
+	@DisplayName("Comportamiento general del constructor básico")
+	@Tag("TestsSobreConstructores")
 	@CsvSource({"SatisfactoryServices-OEIJD45, 15"})
 	void testConstructorBasicoValido(String IDEsperado, int capacidadEsperada) {
 		
@@ -39,11 +38,13 @@ class MaquinaExpendedoraTest {
 		
 	}
 	
-	@Test
-	@DisplayName("Comportamiento del constructor básico ante datos no válidos")
-	@Tag("Tests sobre constructores")
 	@ParameterizedTest
-	@CsvSource({"CasoNoValido-, 15","-C4S0N0V4L1D0, 15","CasoNoValido-//&%$, 15","SatisfactoryServices-OEIJD45, -3"})
+	@DisplayName("Comportamiento del constructor básico ante datos no válidos")
+	@Tag("TestsSobreConstructores")
+	@CsvSource({"CasoNoValido-, 15, Error de formato en el número de serie. Debe ser una cadena no vacía.",
+		"-C4S0N0V4L1D0, 15, Error de formato en la marca. Debe ser una cadena no vacía.",
+		"CasoNoValido-//&%$, 15, Error de formato en el número de serie. Debe ser una cadena alfanumérica.",
+		"SatisfactoryServices-OEIJD45, -3, La capacidad debe ser no-negativa."})
 	void testConstructorBasicoNoValido(String IDEsperado, int capacidadEsperada, String mensajeErrorEsperado) {
 		
 		//Arrange
@@ -61,10 +62,9 @@ class MaquinaExpendedoraTest {
 		
 	}
 	
-	@Test
-	@DisplayName("Comportamiento general del constructor complejo")
-	@Tag("Tests sobre constructores")
 	@ParameterizedTest
+	@DisplayName("Comportamiento general del constructor complejo")
+	@Tag("TestsSobreConstructores")
 	@CsvSource({"SatisfactoryServices, OEIJD45, 15"})
 	void testConstructorComplejoValido(String marcaEsperada, String numSerieEsperado, int capacidadEsperada) {
 		
@@ -88,10 +88,9 @@ class MaquinaExpendedoraTest {
 		
 	}
 	
-	@Test
-	@DisplayName("Comportamiento del constructor complejo ante datos no válidos")
-	@Tag("Tests sobre constructores")
 	@ParameterizedTest
+	@DisplayName("Comportamiento del constructor complejo ante datos no válidos")
+	@Tag("TestsSobreConstructores")
 	@CsvSource({"CasoNoValido, '', 15","'', C4S0N0V4L1D0, 15","CasoNoValido, //&%$, 15","SatisfactoryServices, OEIJD45, -3"})
 	void testConstructorComplejoNoValido(String marcaEsperada, String numSerieEsperado, int capacidadEsperada, String mensajeErrorEsperado) {
 		
@@ -121,9 +120,8 @@ class MaquinaExpendedoraTest {
 			maquina = new MaquinaExpendedora("SatisfactoryServices-OEIJD45",10,new Localizacion(0,0,0));
 		}
 		
-		@Test
-		@DisplayName("Comportamiento general de setID")
 		@ParameterizedTest
+		@DisplayName("Comportamiento general de setID")
 		@CsvSource({"SnackExperience-OGF56HG7"})
 		void testSetIDValido(String IDEsperado) {
 			
@@ -139,10 +137,9 @@ class MaquinaExpendedoraTest {
 			
 		}
 		
-		@Test
-		@DisplayName("Comportamiento de setID ante datos no válidos")
 		@ParameterizedTest
-		@CsvSource({"CasoNoValido-","-C4S0N0V4L1D0","CasoNoValido-//&%$"})
+		@DisplayName("Comportamiento de setID ante datos no válidos")
+		@CsvSource({"CasoNoValido-, Error de formato en el número de serie. Debe ser una cadena no vacía.","-C4S0N0V4L1D0, Error de formato en la marca. Debe ser una cadena no vacía.","CasoNoValido-//&%$, Error de formato en el número de serie. Debe ser una cadena alfanumérica."})
 		void testSetIDNoValido(String IDEsperado, String mensajeErrorEsperado) {
 			
 			//Arrange
@@ -160,9 +157,8 @@ class MaquinaExpendedoraTest {
 			
 		}
 		
-		@Test
-		@DisplayName("Comportamiento general de setMarca")
 		@ParameterizedTest
+		@DisplayName("Comportamiento general de setMarca")
 		@CsvSource({"SnackExperience"})
 		void testSetMarcaValido(String marcaEsperada) {
 			
@@ -179,10 +175,9 @@ class MaquinaExpendedoraTest {
 			
 		}
 		
-		@Test
-		@DisplayName("Comportamiento de setMarca ante datos no válidos")
 		@ParameterizedTest
-		@CsvSource({"''"})
+		@DisplayName("Comportamiento de setMarca ante datos no válidos")
+		@CsvSource({"'', Error de formato en la marca. Debe ser una cadena no vacía."})
 		void testSetMarcaNoValido(String marcaEsperada, String mensajeErrorEsperado) {
 			
 			//Arrange
@@ -200,9 +195,8 @@ class MaquinaExpendedoraTest {
 			
 		}
 		
-		@Test
-		@DisplayName("Comportamiento general de setNumSerie")
 		@ParameterizedTest
+		@DisplayName("Comportamiento general de setNumSerie")
 		@CsvSource({"OGF56HG7"})
 		void testSetNumSerieValido(String numSerieEsperado) {
 			
@@ -219,10 +213,9 @@ class MaquinaExpendedoraTest {
 			
 		}
 		
-		@Test
-		@DisplayName("Comportamiento de setNumSerie ante datos no válidos")
 		@ParameterizedTest
-		@CsvSource({"//&%$","''"})
+		@DisplayName("Comportamiento de setNumSerie ante datos no válidos")
+		@CsvSource({"//&%$, Error de formato en el número de serie. Debe ser una cadena alfanumérica.","'', Error de formato en el número de serie. Debe ser una cadena alfanumérica."})
 		void testSetNumSerieNoValido(String numSerieEsperado, String mensajeErrorEsperado) {
 			
 			//Arrange
@@ -240,9 +233,8 @@ class MaquinaExpendedoraTest {
 			
 		}
 		
-		@Test
-		@DisplayName("Comportamiento general de setCapacidad")
 		@ParameterizedTest
+		@DisplayName("Comportamiento general de setCapacidad")
 		@CsvSource({"15"})
 		void testCapacidadValido(int capacidadEsperada) {
 			
@@ -258,10 +250,9 @@ class MaquinaExpendedoraTest {
 			
 		}
 		
-		@Test
-		@DisplayName("Comportamiento de setCapacidad ante datos no válidos")
 		@ParameterizedTest
-		@CsvSource({"-3"})
+		@DisplayName("Comportamiento de setCapacidad ante datos no válidos")
+		@CsvSource({"-3, La capacidad debe ser no-negativa."})
 		void testSetCapacidadNoValido(int capacidadEsperada, String mensajeErrorEsperado) {
 			
 			//Arrange
