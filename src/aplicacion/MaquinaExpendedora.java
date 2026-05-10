@@ -73,7 +73,7 @@ public class MaquinaExpendedora {
 		this.ID = newID.toString();
 	}
 
-	public Localizacion getLoc(Localizacion loc) {
+	public Localizacion getLoc() {
 		return this.loc;
 	}
 	

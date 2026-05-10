@@ -268,5 +268,14 @@ public class VMaquina extends JFrame {
     private void btnSalirPerformed(ActionEvent evt) {  
         this.dispose();
     }
+    
+    public void setCampos(String marca, String numSerie, int capacidad, int latitud, int longitud, int altitud) {
+    	textMarca.setText(marca);
+		textNSerie.setText(numSerie);
+		textCapacidad.setText(String.valueOf(capacidad));
+		textLatitud.setText(String.valueOf(latitud));
+		textLongitud.setText(String.valueOf(longitud));
+		textAltitud.setText(String.valueOf(altitud));
+    }
 
 }

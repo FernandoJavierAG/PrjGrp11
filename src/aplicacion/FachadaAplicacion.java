@@ -1,6 +1,9 @@
 package aplicacion;
 
 import gui.FachadaGUI;
+
+import java.util.HashMap;
+
 import baseDatos.FachadaBD;
 
 public class FachadaAplicacion {
@@ -20,6 +23,10 @@ public class FachadaAplicacion {
 	
 	public void guardarMaquina(MaquinaExpendedora maquina) {
 		gm.guardarMaquina(maquina);
+	}
+	
+	public HashMap<String, MaquinaExpendedora> cargarMaquinas()  {
+		return gm.cargarMaquinas();
 	}
 	
 	public static void main(String args[]) {

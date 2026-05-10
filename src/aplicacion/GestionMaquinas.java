@@ -20,5 +20,9 @@ public class GestionMaquinas {
 	public void guardarMaquinas(HashMap<String, MaquinaExpendedora> maquinas) {
 		fbd.guardarMaquinas(maquinas);
 	}
+
+	public HashMap<String, MaquinaExpendedora> cargarMaquinas() {
+		return fbd.cargarMaquinas();
+	}
 	
 }
