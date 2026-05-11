@@ -43,6 +43,8 @@ class MaquinaExpendedoraTest {
 	@Tag("TestsSobreConstructores")
 	@CsvSource({"CasoNoValido-, 15, Error de formato de ID: Campos insuficientes.",
 		"-C4S0N0V4L1D0, 15, Error de formato de ID: Campos insuficientes.",
+		"'', 15, Error de formato de ID: No puede ser vacío.",
+		"CasoNoValidoC4S0N0V4L1D0, 15, Error de formato de ID: No hay separador.",
 		"CasoNoValido-//&%$, 15, Error de formato de número de serie: Debe ser una cadena alfanumérica.",
 		"SatisfactoryServices-OEIJD45, -3, Error: La capacidad debe ser no-negativa."})
 	void testConstructorBasicoNoValido(String IDEsperado, int capacidadEsperada, String mensajeErrorEsperado) {
@@ -144,6 +146,8 @@ class MaquinaExpendedoraTest {
 		@DisplayName("Comportamiento de setID ante datos no válidos")
 		@CsvSource({"CasoNoValido-, Error de formato de ID: Campos insuficientes.",
 			"-C4S0N0V4L1D0, Error de formato de ID: Campos insuficientes.",
+			"'', Error de formato de ID: No puede ser vacío.",
+			"CasoNoValidoC4S0N0V4L1D0, Error de formato de ID: No hay separador.",
 			"CasoNoValido-//&%$, Error de formato de número de serie: Debe ser una cadena alfanumérica."})
 		void testSetIDNoValido(String IDEsperado, String mensajeErrorEsperado) {
 			
