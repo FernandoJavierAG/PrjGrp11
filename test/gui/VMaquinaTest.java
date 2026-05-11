@@ -18,11 +18,11 @@ import aplicacion.MaquinaExpendedora;
 
 class VMaquinaTest {
 	
-	FachadaAplicacion fa;
+	static FachadaAplicacion fa;
 	VMaquina vm;
 	
 	@BeforeAll
-	void setUpAll() {
+	static void setUpAll() {
 		fa = new FachadaAplicacion();
 	}
 	
@@ -31,9 +31,8 @@ class VMaquinaTest {
 		vm = new VMaquina(fa);
 	}
 
-	@Test
-	@DisplayName("Comportamiento general de guardarMaquina")
 	@ParameterizedTest
+	@DisplayName("Comportamiento general de guardarMaquina")
 	@CsvSource({"TrickyVending, H4SSL13B3, 15"})
 	void testGuardarMaquinaValido(String marcaEsperada, String numSerieEsperado, int capacidadEsperada) {
 		
@@ -64,11 +63,10 @@ class VMaquinaTest {
 				
 	}
 	
-	@Test
-	@DisplayName("Comportamiento de guardarMaquina para datos no válidos")
 	@ParameterizedTest
-	@CsvSource({"TrickyVending, H4SSL13B3, 15"})
-	void testGuardarMaquinaNoValido(String marcaEsperada, String numSerieEsperado, int capacidadEsperada, String mensajeErrorEsperado) {
+	@DisplayName("Comportamiento de guardarMaquina para datos no válidos")
+	@CsvSource({"TrickyVending, H4SSL13B3, -3"})
+	void testGuardarMaquinaNoValido(String marcaEsperada, String numSerieEsperado, int capacidadEsperada) {
 		
 		//Arrange
 		int latitudEsperada = 0;
@@ -77,14 +75,10 @@ class VMaquinaTest {
 		
 		//Act
 		vm.setCampos(marcaEsperada,numSerieEsperado,capacidadEsperada,latitudEsperada,longitudEsperada,altitudEsperada);
-
+		boolean fallo = vm.guardarMaquina();
 		
 		//Assert
-		Throwable excepcion = assertThrows(
-			IllegalArgumentException.class,
-			() -> vm.guardarMaquina(),
-			"Excepción no generada ante datos erróneos");
-		assertEquals(mensajeErrorEsperado,excepcion.getMessage(),"Generada excepción inesperada");
+		assertFalse(fallo, "Operación finalizada para datos erróneos");
 				
 	}
 	
