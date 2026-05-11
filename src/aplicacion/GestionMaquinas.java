@@ -25,4 +25,8 @@ public class GestionMaquinas {
 		return fbd.cargarMaquinas();
 	}
 	
+	public HashMap<String, MaquinaExpendedora> cargarMaquinas(String ID) {
+		return fbd.cargarMaquinas(ID);
+	}
+	
 }

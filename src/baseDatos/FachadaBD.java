@@ -29,6 +29,10 @@ public class FachadaBD {
 		return daoMaquinas.cargarMaquinas();
 	}
 	
+	public HashMap<String, MaquinaExpendedora> cargarMaquinas(String ID) {
+		return daoMaquinas.cargarMaquinas(ID);
+	}
+	
 	public void guardarMaquinas(HashMap<String, MaquinaExpendedora> maquinas) {
 		daoMaquinas.guardarMaquinas(maquinas);
 	}

@@ -29,6 +29,10 @@ public class FachadaAplicacion {
 		return gm.cargarMaquinas();
 	}
 	
+	public HashMap<String, MaquinaExpendedora> cargarMaquinas(String ID)  {
+		return gm.cargarMaquinas(ID);
+	}
+	
 	public static void main(String args[]) {
 		new FachadaAplicacion();
 	}
