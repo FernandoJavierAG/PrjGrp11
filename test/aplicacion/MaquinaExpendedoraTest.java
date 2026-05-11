@@ -281,6 +281,42 @@ class MaquinaExpendedoraTest {
 			
 		}
 		
+		@ParameterizedTest
+		@DisplayName("Comportamiento de equals para máquinas iguales")
+		@CsvSource({"SatisfactoryServices-OEIJD45, 10, 0, 0, 0"})
+		void testEqualsIguales(String IDEsperado, int capacidadEsperada, int latitudEsperada, int longitudEsperada, int altitudEsperada) {
+			
+			//Arrange
+			Localizacion locEsperada = new Localizacion(latitudEsperada, longitudEsperada, altitudEsperada);
+			MaquinaExpendedora otraMaquina = new MaquinaExpendedora(IDEsperado, capacidadEsperada, locEsperada);
+			
+			//Act
+			boolean iguales = maquina.equals(otraMaquina);
+			
+			//Assert
+			assertTrue(iguales,"Objetos iguales identificados como diferentes");
+			
+		}
+		
+		@ParameterizedTest
+		@DisplayName("Comportamiento de equals para máquinas distintas")
+		@CsvSource({"SatisfactoryServices-OEIJD45, 15, 0, 0, 0",
+			"SnackExperience-OEIJD45, 10, 0, 0, 0",
+			"SnackExperience-OEIJD45, 10, 1, 0, 0"})
+		void testEqualsDistintos(String IDEsperado, int capacidadEsperada, int latitudEsperada, int longitudEsperada, int altitudEsperada) {
+			
+			//Arrange
+			Localizacion locEsperada = new Localizacion(latitudEsperada, longitudEsperada, altitudEsperada);
+			MaquinaExpendedora otraMaquina = new MaquinaExpendedora(IDEsperado, capacidadEsperada, locEsperada);
+			
+			//Act
+			boolean iguales = maquina.equals(otraMaquina);
+			
+			//Assert
+			assertFalse(iguales,"Objetos iguales identificados como diferentes");
+			
+		}
+		
 	}
 
 }
