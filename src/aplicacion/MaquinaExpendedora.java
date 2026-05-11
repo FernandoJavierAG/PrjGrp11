@@ -11,6 +11,8 @@ public class MaquinaExpendedora {
 	
 	
 	public MaquinaExpendedora(String marca, String numSerie, int capacidad, Localizacion loc) throws IllegalArgumentException {
+		_IsValidMarca(marca);
+		_IsValidNumSerie(numSerie);
 		StringBuilder newID = new StringBuilder();
 		newID.append(marca);
 		newID.append("-");
@@ -20,10 +22,56 @@ public class MaquinaExpendedora {
 	}
 	
 	public MaquinaExpendedora(String ID, int capacidad, Localizacion loc) throws IllegalArgumentException {
+		_IsValidID(ID);
 		this.ID = ID;
+		_IsValidCapacidad(capacidad);
 		setCapacidad(capacidad);
 		this.loc = loc;
 		ultimaActualizacion = null;
+	}
+	
+	private static Boolean _IsValidID(String ID) throws IllegalArgumentException {
+		if(ID == null || ID.equals(""))
+			throw new IllegalArgumentException("Error de formato de ID: No puede ser vacío.");
+		if(!ID.contains("-"))
+			throw new IllegalArgumentException("Error de formato de ID: No hay separador.");
+		
+		String campos[] = ID.split("-");
+		
+		if(campos.length != 2 || campos[0].equals("") || campos[1].equals(""))
+			throw new IllegalArgumentException("Error de formato de ID: Campos insuficientes.");
+		
+		String 
+			marca= campos[0],
+			numSerie= campos[1];
+		
+		_IsValidMarca(marca);
+		_IsValidNumSerie(numSerie);
+		
+		return true;
+	}
+	
+	private static Boolean _IsValidNumSerie(String numSerie) throws IllegalArgumentException {
+		if(numSerie == null || numSerie.equals(""))
+			throw new IllegalArgumentException("Error de formato de número de serie: No puede ser vacío.");
+		if(!numSerie.matches("[a-zA-Z0-9]+"))
+			throw new IllegalArgumentException("Error de formato de número de serie: Debe ser una cadena alfanumérica.");
+		else
+			return true;
+	}
+	
+	private static Boolean _IsValidMarca(String marca) throws IllegalArgumentException {
+		if(marca == null || marca.equals(""))
+			throw new IllegalArgumentException("Error de formato de marca: No puede ser vacía.");
+		else
+			return true;
+	}
+
+	private static Boolean _IsValidCapacidad(int capacidad) throws IllegalArgumentException {
+		if(capacidad <= 0)
+			throw new IllegalArgumentException("Error: La capacidad debe ser no-negativa.");
+		else
+			return true;
 	}
 	
 	public String getID() {
@@ -31,6 +79,7 @@ public class MaquinaExpendedora {
 	}
 	
 	public void setID(String ID) {
+		_IsValidID(ID);
 		String brokenID[] = ID.split("-");
 		
 		setMarca(brokenID[0]);
@@ -44,6 +93,8 @@ public class MaquinaExpendedora {
 
 
 	public void setMarca(String marca) {
+		_IsValidMarca(marca);
+
 		StringBuilder newID = new StringBuilder();
 		newID.append(marca);
 		newID.append("-");
@@ -59,14 +110,12 @@ public class MaquinaExpendedora {
 	}
 
 
-	public void setNumSerie(String numSerie) throws IllegalArgumentException {
-		if(!numSerie.matches("[a-zA-Z0-9]+")) {
-			throw new IllegalArgumentException("Error de formato en el número de serie. Debe ser una cadena alfanumérica.");
-		}
+	public void setNumSerie(String numSerie) {
+		_IsValidNumSerie(numSerie);
 		
 		StringBuilder newID = new StringBuilder();
 		if(ID != null)
-			newID.append(ID.split("-")[1]);
+			newID.append(ID.split("-")[0]);
 		newID.append("-");
 		newID.append(numSerie);
 		
@@ -83,6 +132,13 @@ public class MaquinaExpendedora {
 
 	public int getCapacidad() {
 		return capacidad;
+	}
+	
+	public void setCapacidad(int capacidad) {
+		_IsValidCapacidad(capacidad);
+		
+		this.capacidad = capacidad;
+		setUltimaActualizacion(Instant.now());
 	}
 
 	public float getAltitud() {
@@ -107,16 +163,6 @@ public class MaquinaExpendedora {
 	
 	public void setLongitud(float longitud) {
 		loc.setLongitud(longitud);
-	}
-	
-	
-	public void setCapacidad(int capacidad) throws IllegalArgumentException {
-		this.capacidad = capacidad;
-		if(capacidad < 0) {
-			throw new IllegalArgumentException("La capacidad debe ser no-negativa.");
-		}
-		this.capacidad = capacidad;
-		setUltimaActualizacion(Instant.now());
 	}
 
 	public Instant getUltimaActualizacion() {

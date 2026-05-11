@@ -41,10 +41,10 @@ class MaquinaExpendedoraTest {
 	@ParameterizedTest
 	@DisplayName("Comportamiento del constructor básico ante datos no válidos")
 	@Tag("TestsSobreConstructores")
-	@CsvSource({"CasoNoValido-, 15, Error de formato en el número de serie. Debe ser una cadena no vacía.",
-		"-C4S0N0V4L1D0, 15, Error de formato en la marca. Debe ser una cadena no vacía.",
-		"CasoNoValido-//&%$, 15, Error de formato en el número de serie. Debe ser una cadena alfanumérica.",
-		"SatisfactoryServices-OEIJD45, -3, La capacidad debe ser no-negativa."})
+	@CsvSource({"CasoNoValido-, 15, Error de formato de ID: Campos insuficientes.",
+		"-C4S0N0V4L1D0, 15, Error de formato de ID: Campos insuficientes.",
+		"CasoNoValido-//&%$, 15, Error de formato de número de serie: Debe ser una cadena alfanumérica.",
+		"SatisfactoryServices-OEIJD45, -3, Error: La capacidad debe ser no-negativa."})
 	void testConstructorBasicoNoValido(String IDEsperado, int capacidadEsperada, String mensajeErrorEsperado) {
 		
 		//Arrange
@@ -91,10 +91,10 @@ class MaquinaExpendedoraTest {
 	@ParameterizedTest
 	@DisplayName("Comportamiento del constructor complejo ante datos no válidos")
 	@Tag("TestsSobreConstructores")
-	@CsvSource({"CasoNoValido, '', 15, Error de formato en el número de serie. Debe ser una cadena no vacía.",
-		"'', C4S0N0V4L1D0, 15, Error de formato en la marca. Debe ser una cadena no vacía.",
-		"CasoNoValido, //&%$, 15, Error de formato en el número de serie. Debe ser una cadena alfanumérica.",
-		"SatisfactoryServices, OEIJD45, -3, La capacidad debe ser no-negativa."})
+	@CsvSource({"CasoNoValido, '', 15, Error de formato de número de serie: No puede ser vacío.",
+		"'', C4S0N0V4L1D0, 15, Error de formato de marca: No puede ser vacía.",
+		"CasoNoValido, //&%$, 15, Error de formato de número de serie: Debe ser una cadena alfanumérica.",
+		"SatisfactoryServices, OEIJD45, -3, Error: La capacidad debe ser no-negativa."})
 	void testConstructorComplejoNoValido(String marcaEsperada, String numSerieEsperado, int capacidadEsperada, String mensajeErrorEsperado) {
 		
 		//Arrange
@@ -142,9 +142,9 @@ class MaquinaExpendedoraTest {
 		
 		@ParameterizedTest
 		@DisplayName("Comportamiento de setID ante datos no válidos")
-		@CsvSource({"CasoNoValido-, Error de formato en el número de serie. Debe ser una cadena no vacía.",
-			"-C4S0N0V4L1D0, Error de formato en la marca. Debe ser una cadena no vacía.",
-			"CasoNoValido-//&%$, Error de formato en el número de serie. Debe ser una cadena alfanumérica."})
+		@CsvSource({"CasoNoValido-, Error de formato de ID: Campos insuficientes.",
+			"-C4S0N0V4L1D0, Error de formato de ID: Campos insuficientes.",
+			"CasoNoValido-//&%$, Error de formato de número de serie: Debe ser una cadena alfanumérica."})
 		void testSetIDNoValido(String IDEsperado, String mensajeErrorEsperado) {
 			
 			//Arrange
@@ -182,7 +182,7 @@ class MaquinaExpendedoraTest {
 		
 		@ParameterizedTest
 		@DisplayName("Comportamiento de setMarca ante datos no válidos")
-		@CsvSource({"'', Error de formato en la marca. Debe ser una cadena no vacía."})
+		@CsvSource({"'', Error de formato de marca: No puede ser vacía."})
 		void testSetMarcaNoValido(String marcaEsperada, String mensajeErrorEsperado) {
 			
 			//Arrange
@@ -221,8 +221,8 @@ class MaquinaExpendedoraTest {
 		
 		@ParameterizedTest
 		@DisplayName("Comportamiento de setNumSerie ante datos no válidos")
-		@CsvSource({"//&%$, Error de formato en el número de serie. Debe ser una cadena alfanumérica.",
-			"'', Error de formato en el número de serie. Debe ser una cadena alfanumérica."})
+		@CsvSource({"//&%$, Error de formato de número de serie: Debe ser una cadena alfanumérica.",
+			"'', Error de formato de número de serie: No puede ser vacío."})
 		void testSetNumSerieNoValido(String numSerieEsperado, String mensajeErrorEsperado) {
 			
 			//Arrange
@@ -259,7 +259,7 @@ class MaquinaExpendedoraTest {
 		
 		@ParameterizedTest
 		@DisplayName("Comportamiento de setCapacidad ante datos no válidos")
-		@CsvSource({"-3, La capacidad debe ser no-negativa."})
+		@CsvSource({"-3, Error: La capacidad debe ser no-negativa."})
 		void testSetCapacidadNoValido(int capacidadEsperada, String mensajeErrorEsperado) {
 			
 			//Arrange
