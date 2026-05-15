@@ -1,5 +1,8 @@
 package baseDatos;
 
+import java.util.HashMap;
+import aplicacion.*;
+
 public class FachadaBD {
 	aplicacion.FachadaAplicacion fa;
 	
@@ -11,10 +14,31 @@ public class FachadaBD {
 	public FachadaBD(aplicacion.FachadaAplicacion fa) {
 		this.fa = fa;
 		
+		daoMaquinas = new MaquinasDAO(fa, null);
+		daoProductos = new ProductosDAO(fa, null);
+		
+		// TO-DO
 		// Apertura de conexión
 		
 		// ...
 		
 		//
 	}
+	
+	public HashMap<String, MaquinaExpendedora> cargarMaquinas() {
+		return daoMaquinas.cargarMaquinas();
+	}
+	
+	public HashMap<String, MaquinaExpendedora> cargarMaquinas(String ID) {
+		return daoMaquinas.cargarMaquinas(ID);
+	}
+	
+	public void guardarMaquinas(HashMap<String, MaquinaExpendedora> maquinas) {
+		daoMaquinas.guardarMaquinas(maquinas);
+	}
+	
+	public void guardarMaquina(MaquinaExpendedora maquina) {
+		daoMaquinas.guardarMaquina(maquina);
+	}
+	
 }
