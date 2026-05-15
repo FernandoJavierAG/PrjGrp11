@@ -9,7 +9,8 @@ import java.util.stream.Collectors;
 public class Stock {
 
     // ── Repositorio interno ──────────────────────────────────────────────────
-    private static final List<Stock> repositorio = new ArrayList<>();
+	//Público para acceder fácilmente a este durante las pruebas
+    public static final List<Stock> repositorio = new ArrayList<>();
 
     // ── Atributos de instancia ───────────────────────────────────────────────
     private Producto producto;
