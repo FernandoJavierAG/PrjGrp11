@@ -10,7 +10,7 @@ public class MaquinaExpendedora {
 	private Localizacion loc;
 	
 	
-	public MaquinaExpendedora(String marca, String numSerie, int capacidad, Localizacion loc) throws IllegalArgumentException {
+	public MaquinaExpendedora(String marca, String numSerie, int capacidad, Localizacion loc) {
 		_IsValidMarca(marca);
 		_IsValidNumSerie(numSerie);
 		StringBuilder newID = new StringBuilder();
@@ -21,7 +21,7 @@ public class MaquinaExpendedora {
 		this(newID.toString(), capacidad, loc);
 	}
 	
-	public MaquinaExpendedora(String ID, int capacidad, Localizacion loc) throws IllegalArgumentException {
+	public MaquinaExpendedora(String ID, int capacidad, Localizacion loc) {
 		_IsValidID(ID);
 		this.ID = ID;
 		_IsValidCapacidad(capacidad);
