@@ -40,11 +40,14 @@ public class VMaquina extends JFrame {
 	
 	public void _postInit() {
 		if(maquina != null) {
-			textMarca.setText(maquina.getMarca());
-			textNSerie.setText(maquina.getNumSerie());
-			textLatitud.setText(String.valueOf(maquina.getLatitud()));
-			textLongitud.setText(String.valueOf(maquina.getLongitud()));
-			textAltitud.setText(String.valueOf(maquina.getAltitud()));
+			setCampos(
+					maquina.getMarca(), 
+					maquina.getNumSerie(), 
+					maquina.getCapacidad(), 
+					maquina.getLatitud(), 
+					maquina.getLongitud(), 
+					maquina.getAltitud()
+					);
 		}
 	}
 	
@@ -269,7 +272,7 @@ public class VMaquina extends JFrame {
         this.dispose();
     }
     
-    public void setCampos(String marca, String numSerie, int capacidad, int latitud, int longitud, int altitud) {
+    public void setCampos(String marca, String numSerie, int capacidad, float latitud, float longitud, float altitud) {
     	textMarca.setText(marca);
 		textNSerie.setText(numSerie);
 		textCapacidad.setText(String.valueOf(capacidad));
