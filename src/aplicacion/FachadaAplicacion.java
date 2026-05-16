@@ -1,5 +1,8 @@
 package aplicacion;
 
+import baseDatos.FachadaBD;
+import gui.FachadaGUI;
+
 public class FachadaAplicacion {
 	
 	gui.FachadaGUI fgui;
@@ -9,8 +12,8 @@ public class FachadaAplicacion {
 
 	
 	public FachadaAplicacion() {
-		fgui = new fgui();
-		fbd = new fbd();
+		fgui = new FachadaGUI(this);
+		fbd = new FachadaBD(this);
 		
 		gm = new GestionMaquinas(fgui, fbd);
 	}

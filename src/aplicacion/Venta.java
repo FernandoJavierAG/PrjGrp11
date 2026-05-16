@@ -10,9 +10,15 @@ public class Venta {
 	private int unidades;
 	
 	//Se toma como momento de la venta el de la creación de su instancia original
-	public Venta(MaquinaExpendedora maquina, Producto producto, int unidades) {
+	public Venta(MaquinaExpendedora maquina, Producto producto, int unidades) throws IllegalArgumentException{
+		if (maquina == null)
+				throw new IllegalArgumentException("Maquina nula introducida.");
 		this.maquina = maquina;
+		if (producto == null)
+			throw new IllegalArgumentException("Producto nulo introducido.");
 		this.producto = producto;
+		if (unidades < 1)
+			throw new IllegalArgumentException("Unidades no-validas introducidas.");
 		this.unidades = unidades;
 		this.fecha = Instant.now();
 	}
@@ -22,6 +28,10 @@ public class Venta {
 	}
 
 	public void setFecha(Instant fecha) {
+		if (fecha == null)
+			throw new IllegalArgumentException("Fecha nula introducida.");
+		if (fecha.isAfter(Instant.now()))
+			throw new IllegalArgumentException("Fecha futura introducida.");
 		this.fecha = fecha;
 	}
 
@@ -29,7 +39,9 @@ public class Venta {
 		return unidades;
 	}
 
-	public void setUnidades(int unidades) {
+	public void setUnidades(int unidades) throws IllegalArgumentException {
+		if (unidades < 1)
+			throw new IllegalArgumentException("Unidades no-validas introducidas.");
 		this.unidades = unidades;
 	}
 
@@ -37,7 +49,9 @@ public class Venta {
 		return maquina;
 	}
 
-	public void setMaquina(MaquinaExpendedora maquina) {
+	public void setMaquina(MaquinaExpendedora maquina) throws IllegalArgumentException {
+		if (maquina == null)
+			throw new IllegalArgumentException("Maquina nula introducida.");
 		this.maquina = maquina;
 	}
 
@@ -45,7 +59,9 @@ public class Venta {
 		return producto;
 	}
 
-	public void setProducto(Producto producto) {
+	public void setProducto(Producto producto) throws IllegalArgumentException {
+		if (producto == null)
+			throw new IllegalArgumentException("Producto nulo introducido.");
 		this.producto = producto;
 	}
 	
@@ -58,7 +74,7 @@ public class Venta {
 		if (this.getClass() != obj.getClass())
 			return false;
 		Venta other = (Venta) obj;
-		return (this.fecha.equals(other.getFecha())&& this.stock.equals(other.getMaquina()));
+		return (this.fecha.equals(other.getFecha())&& this.maquina.equals(other.getMaquina()));
 	}
 	
 	
