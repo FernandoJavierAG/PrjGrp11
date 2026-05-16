@@ -3,12 +3,14 @@ package aplicacion;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.assumingThat;
 import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.*;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.time.Duration;
@@ -182,7 +184,7 @@ class StockTest {
 		
 		// Assert
 		// Comprobamos igualdad de arrays
-		assertArrayEquals(0, resultadoReal.size(), "No se devuelve una lista vacía.");
+		assertEquals(0, resultadoReal.size(), "No se devuelve una lista vacía.");
 	}
 	
 	// CP B
@@ -201,7 +203,7 @@ class StockTest {
 		// Comprobamos igualdad de tamaños de array
 		assertEquals(1, resultadoReal.size(), "No se devuelve una lista de 1 elemento.");
 		// Solo comprobaremos que el Id de la máquina asociada es el correcto
-		assertTrue("Snackmaster-ABBC77789", resultadoReal.get(0).getMaquina().getID(), "No se devuelve el stock correcto.");
+		assertEquals("Snackmaster-ABBC77789", resultadoReal.get(0).getMaquina().getID(), "No se devuelve el stock correcto.");
 	}
 	
 	// CP C
@@ -298,7 +300,7 @@ class StockTest {
 		// Comprobamos igualdad de tamaños de array
 		assertEquals(1, resultadoReal.size(), "No se devuelve una lista de 1 elemento.");
 		// Solo comprobaremos que el Id del producto asociada es el correcto
-		assertTrue("A3", resultadoReal.get(0).getProducto().getID(), "No se devuelve el stock correcto.");
+		assertEquals("A3", resultadoReal.get(0).getProducto().getID(), "No se devuelve el stock correcto.");
 	}
 	
 	// CP C
@@ -551,7 +553,7 @@ class StockTest {
 		
 		// Assert
 		IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
-				() -> {Stock.getUltimaActualizacion(null);}, "El método no lanza la excepción de máquina nula.");
+				() -> {Stock.consultarUltimaActualizacion(null);}, "El método no lanza la excepción de máquina nula.");
 	}
 	
 	// CP C
