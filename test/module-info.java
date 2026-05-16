@@ -8,4 +8,5 @@ module PrjGrp11 {
 	requires org.junit.jupiter.api;
 	requires org.junit.jupiter.params;
 	requires org.opentest4j;
+	requires org.mockito;
 }
