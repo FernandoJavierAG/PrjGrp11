@@ -10,7 +10,8 @@ public class Stock {
 
     // ── Repositorio interno ──────────────────────────────────────────────────
 	//Público para acceder fácilmente a este durante las pruebas
-    public static final List<Stock> repositorio = new ArrayList<>();
+	//En un contexto real, estaría incluido en una BBDD o un archivo ajeno a este código
+    public static List<Stock> repositorio = new ArrayList<>();
 
     // ── Atributos de instancia ───────────────────────────────────────────────
     private Producto producto;

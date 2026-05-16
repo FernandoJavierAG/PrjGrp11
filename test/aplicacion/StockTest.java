@@ -3,7 +3,6 @@ package aplicacion;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.assumingThat;
 import static org.mockito.Mockito.*;
-import static org.mockito.Matchers.*;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,7 +12,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
 import java.util.ArrayList;
@@ -45,8 +43,8 @@ class StockTest {
 		
 		// Asignación de productos a máquinas
 		// No devolvemos nada al no necesitar probar el setter de la clase máquina
-		when(m1.setProductos(any(List.class))).thenReturn();
-		when(m2.setProductos(any(List.class))).thenReturn();
+		doNothing().when(m1).setProductos(any(List.class));
+		doNothing().when(m2).setProductos(any(List.class));
 		
 		// IDs de productos
 		when(p1.getID()).thenReturn("A3");
@@ -94,8 +92,10 @@ class StockTest {
 		List<Stock> repo = Stock.repositorio;
 		
 		// Assert
-		// Comprobamos igualdad de arrays
-		assertArrayEquals(resultadoEsperado, repo, "El repositorio no contiene el stock esperado.");
+		// Comprobamos igualdad de tamaños de arrays
+		assertEquals(resultadoEsperado.size(), repo.size(), "El repositorio no contiene el número esperado de stocks.");
+		// Comprobamos igualdad entre contenidos de arrays
+		assertEquals(resultadoEsperado, repo, "El repositorio no contiene los stocks esperados.");
 	}
 	
 	// CP B
@@ -281,7 +281,7 @@ class StockTest {
 		
 		// Assert
 		// Comprobamos igualdad de arrays
-		assertArrayEquals(0, resultadoReal.size(), "No se devuelve una lista vacía.");
+		assertEquals(0, resultadoReal.size(), "No se devuelve una lista vacía.");
 	}
 	
 	// CP B
@@ -381,14 +381,16 @@ class StockTest {
 		List<Stock> repo = Stock.repositorio;
 		
 		// Buscamos en el repositorio el stock con los datos pedidos
-		Stock resultadoEsperado = null;
+		Stock aux = null;
 		for(Stock stocks : repo) {
 			if(stocks.getMaquina().getID().equals(maquina.getID())){
 				if(stocks.getProducto().getID().equals(prod.getID())){
-					resultadoEsperado = stocks;
+					aux = stocks;
 				}
 			}
 		}
+		// Necesitamos una variable de tipo final o efectivamente final para usar en assert (en este caso es del segundo tipo)
+		Stock resultadoEsperado = aux;
 		
 		// Assert
 		// Comprobamos que el elemento buscado existe
@@ -507,14 +509,16 @@ class StockTest {
 		List<Stock> repo = Stock.repositorio;
 		
 		// Buscamos en el repositorio el stock con los datos pedidos
-		Stock resultadoEsperado = null;
+		Stock aux = null;
 		for(Stock stocks : repo) {
 			if(stocks.getMaquina().getID().equals(maquina.getID())){
 				if(stocks.getProducto().getID().equals(prod.getID())){
-					resultadoEsperado = stocks;
+					aux = stocks;
 				}
 			}
 		}
+		// Usamos variable efectivamente final (ie, cuya referencia no se modifica)
+		Stock resultadoEsperado = aux;
 		
 		// Assert
 		// CP F
